@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Añadir Pregunta{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Añadir Pregunta al Quiz: {{ quiz.title }}</h1>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label for="question_text" class="form-label">Pregunta</label>
+            <input type="text" id="question_text" name="question_text" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="option_a" class="form-label">Opción A</label>
+            <input type="text" id="option_a" name="option_a" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="option_b" class="form-label">Opción B</label>
+            <input type="text" id="option_b" name="option_b" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="option_c" class="form-label">Opción C</label>
+            <input type="text" id="option_c" name="option_c" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="option_d" class="form-label">Opción D</label>
+            <input type="text" id="option_d" name="option_d" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="correct_option" class="form-label">Opción Correcta (0-3)</label>
+            <input type="number" id="correct_option" name="correct_option" class="form-control" min="0" max="3" required>
+        </div>
+
+        <button type="submit" name="action" value="add" class="btn btn-primary w-100">Añadir Pregunta</button>
+        <button type="submit" name="action" value="finish" class="btn btn-success w-100 mt-2">Completar Quiz</button>
+    </form>
+
+    <br><br>
+    <a href="{{ url_for('quiz.cancel_quiz', quiz_id=quiz.title) }}" class="btn btn-secondary w-100">Volver al inicio</a>
+{% endblock %}

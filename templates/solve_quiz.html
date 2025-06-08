@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Resolver Quiz: {{ quiz.title }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Resolver Quiz: {{ quiz.title }}</h1>
+
+    <form method="POST">
+        <div class="mb-3">
+            <p><strong>{{ questions[question_index].question_text }}</strong></p>
+            <div>
+                {% for option in questions[question_index].options %}
+                    <label class="form-check-label">
+                        <input type="radio" name="selected_option" value="{{ loop.index0 }}" class="form-check-input" required>
+                        {{ option }}
+                    </label><br>
+                {% endfor %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+            {% if question_index + 1 == questions|length %}
+                Finalizar
+            {% else %}
+                Siguiente pregunta
+            {% endif %}
+        </button>
+    </form>
+
+    <br><br>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary w-100">Volver al inicio</a>
+{% endblock %}

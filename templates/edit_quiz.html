@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Editar Quiz</h1>
+
+<form method="POST" class="w-50 mx-auto">
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" name="title" class="form-control" id="title" value="{{ quiz.title }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descripción</label>
+        <input type="text" name="description" class="form-control" id="description" value="{{ quiz.description }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
+</form>
+
+<h2 class="text-center mt-5">Preguntas</h2>
+<ul class="list-group w-50 mx-auto">
+    {% for question in questions %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ question.question_text }}
+            <a href="{{ url_for('quiz.edit_question', question_oid=question.__oid__) }}?quiz_id={{ quiz.title }}" class="btn btn-sm btn-secondary">Editar</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

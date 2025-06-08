@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Quizzes Disponibles{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Quizzes Disponibles</h1>
+
+    {% if quizzes %}
+        <form method="POST">
+            <ul class="list-group">
+                {% for quiz in quizzes %}
+                    <li class="list-group-item">
+                        <span>{{ quiz.title }} (Creado por: {{ quiz.user_email }})</span>
+                        <button type="submit" name="quiz_id" value="{{ quiz.title }}" class="btn btn-primary btn-sm float-right">Resolver</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </form>
+    {% else %}
+        <p class="text-center">No hay quizzes disponibles para resolver.</p>
+    {% endif %}
+    
+    <br>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary w-100">Volver al menú principal</a>
+{% endblock %}

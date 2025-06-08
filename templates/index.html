@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido a QuizForge{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Bienvenido a QuizForge</h1>
+
+    {% if current_user.is_authenticated %}
+        <p class="text-center">¡Hola, {{ current_user.email }}!</p>
+        <div class="text-center">
+            <a href="{{ url_for('quiz.create_quiz') }}" class="btn btn-primary">Crear un nuevo Quiz</a>
+            <a href="{{ url_for('quiz.quizzes') }}" class="btn btn-secondary">Ver mis quizzes</a>  
+            <a href="{{ url_for('quiz.solve_others_quizzes') }}" class="btn btn-info">Resolver Quizzes</a>  <!-- Aquí agregamos el enlace -->
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-danger">Cerrar sesión</a>
+        </div>
+    {% else %}
+        <p class="text-center">Inicia sesión o regístrate para empezar.</p>
+        <div class="text-center">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-secondary">Register</a>
+        </div>
+    {% endif %}
+{% endblock %}

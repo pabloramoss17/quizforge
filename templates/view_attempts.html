@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Intentos{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Historial de Intentos para el Quiz: {{ quiz_title }}</h1>
+
+    {% if attempts %}
+        <ul class="list-group">
+            {% for attempt in attempts %}
+                <li class="list-group-item">
+                    <strong>Fecha:</strong> {{ attempt.date.strftime('%Y-%m-%d') }}&#9;{{ attempt.date.strftime('%H:%M:%S') }}<br>
+                    <strong>Puntuación:</strong> {{ attempt.score }} correcta(s), {{ questions|length - attempt.score }} falsa(s)<br>
+                    <strong>Respuestas:</strong>
+                    <ul>
+                        {% for i in range(questions|length) %}
+                            <li>
+                                {{ questions[i].options[attempt.answers[i]] }}
+                                {% if attempt.answers[i] == questions[i].correct_option %}
+                                    <span class="badge bg-success">✔</span>
+                                {% else %}
+                                    <span class="badge bg-danger">✘</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center">No tienes intentos previos para este quiz.</p>
+    {% endif %}
+
+    <br><br>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary w-100">Volver al inicio</a>
+{% endblock %}

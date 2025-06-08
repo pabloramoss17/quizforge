@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Mis Quizzes{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Mis Quizzes</h1>
+
+    {% if quizzes %}
+        <ul class="list-group">
+            {% for quiz in quizzes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ quiz.title }}</span>
+                    <div>
+                        <a href="{{ url_for('quiz.edit_quiz', quiz_id=quiz.title) }}" class="btn btn-warning btn-sm">Editar</a>
+
+                        <!-- Formulario para eliminar el quiz -->
+                        <form action="{{ url_for('quiz.delete_quiz', quiz_id=quiz.title) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este quiz?');">Eliminar</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center">No has creado ningún quiz todavía.</p>
+    {% endif %}
+
+    <br><br>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary w-100">Volver al inicio</a>
+{% endblock %}

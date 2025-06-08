@@ -1,0 +1,35 @@
+# Entorno virtual
+venv/
+.env/
+ENV/
+env.bak/
+*.pyc
+__pycache__/
+
+# Archivos de configuración o claves
+*.env
+config.json
+
+# Archivos temporales / de usuario
+*.log
+*.sqlite3
+*.db
+.DS_Store
+*.swp
+
+# Archivos creados por Sirope
+sirope_data/
+
+# Archivos de depuración
+*.bak
+*.tmp
+
+# Archivos del sistema operativo
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# PyCharm / VSCode
+.idea/
+.vscode/
